@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="list-section">
+      <h2>Github usernames</h2>
+      <ul id="usernames-list"></ul>
+    </div>
+  </body>
+  <script >
+    const GITHUB_API = "https://api.github.com/users";
+
+/**
+ * Return an array of usernames fetched from the Github API
+ * https://api.github.com/users
+ */
+async function getGithubUsernames() {
+  try {
+    const response = await fetch(GITHUB_API);
+    const users = await response.json();
+    console.log(users);
+    return users.map((user) => user.login);
+  } catch (error) {
+    console.log("Error fetching usernames:", error);
+    return [];
+  }
+}
+
+/**
+ * Display the values passed as arguments as a list on the screen
+ * @param {Array} values
+ */
+function displayValuesAsList(values) {
+  const listElement = document.createElement("ul");
+  values.forEach((value) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = value;
+    listElement.appendChild(listItem);
+  });
+  document.getElementById("usernames-list").appendChild(listElement);
+}
+//usage
+(async () => {
+  const usernames = await getGithubUsernames();
+  displayValuesAsList(usernames);
+})();
+
+  </script>
+</html>
