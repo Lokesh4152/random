@@ -151,16 +151,19 @@
           date: date.value
         };
         let allFieldsFilled = true;
-        for (let key in formData) {
-          if (formData[key] === "") {
-            allFieldsFilled = false;
-          }
-        }
-        if (allFieldsFilled) {
-          submitBtn.disabled = false;
-        } else {
+        if (Object.values(formData).includes("")) {
           submitBtn.disabled = true;
-        }
+        } else submitBtn.disabled = false;
+        // for (let key in formData) {
+        //   if (formData[key] === "") {
+        //     allFieldsFilled = false;
+        //   }
+        // }
+        // if (allFieldsFilled) {
+        //   submitBtn.disabled = false;
+        // } else {
+        //   submitBtn.disabled = true;
+        // }
       });
     </script>
   </body>
